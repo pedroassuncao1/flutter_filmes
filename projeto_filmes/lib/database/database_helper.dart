@@ -4,18 +4,18 @@ import '../models/filme.dart';
 
 class DatabaseHelper{
 
-    // Definindo a versão do DB e nome da tabela
+    // Definindo variaveis do banco de dados
     static const int _version = 1;
     static const String _dbName = 'filmes_database.db';
     static const String _tableName = 'filmes';
 
-    // Usando o padrão Singleton para ter apenas uma instância do DB
+    // Usando Singleton para ter apenas uma instância do DB
     static final DatabaseHelper instance = DatabaseHelper._internal();
     static Database? _database;
 
     DatabaseHelper._internal();
 
-    // Getter para o banco de dados, inicializando-o se ainda não existir
+    // Getter para o banco de dados
     Future<Database> get database async {
 
         if(_database != null) return _database!;
@@ -24,7 +24,7 @@ class DatabaseHelper{
 
     }
 
-    // Inicializa o banco
+    // Inicializa o banco caso ele não exista
     Future<Database> _initDatabase() async {
 
         // Obtém o caminho padrão onde o DB deve ser armazenado
@@ -55,13 +55,12 @@ class DatabaseHelper{
                 ano INTEGER NOT NULL,
                 descricao TEXT NOT NULL
             );
-        '''); // CORRIGIDO: Adicionado ponto e vírgula final
+        ''');
     }
 
     // CRUD
 
     // CREATE: Inserindo um filme novo no banco de dados
-    // CORRIGIDO: Nome da função agora é 'insertFilme' (camelCase)
     Future<int> insertFilme(Filme filme) async {
         Database db = await database;
         // O 'conflictAlgorithm' substitui o filme se o mesmo ID foi inserido
@@ -86,6 +85,7 @@ class DatabaseHelper{
     // UPDATE: Atualizar um filme
     Future<int> updateFilme(Filme filme) async {
         Database db = await database;
+        // Utiliza placeholder para proteger contra sql injection
         return await db.update(
             _tableName,
             filme.toMap(),
@@ -97,6 +97,7 @@ class DatabaseHelper{
     // DELETE: Deletando um filme pelo ID
     Future<int> deleteFilme(int id) async {
         Database db = await database;
+        // Utiliza placeholder para proteger contra sql injection
         return await db.delete(
             _tableName,
             where: 'id = ?',

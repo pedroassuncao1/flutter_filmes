@@ -3,9 +3,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../models/filme.dart';
 import '../database/database_helper.dart';
 
-// O construtor agora pode receber um filme (opcional)
 class CadastroFilmeScreen extends StatefulWidget {
-  final Filme? filmeParaEditar; // Filme a ser editado
+  // Filme a ser editado
+  final Filme? filmeParaEditar;
 
   const CadastroFilmeScreen({super.key, this.filmeParaEditar});
 
@@ -55,7 +55,7 @@ class _CadastroFilmeScreenState extends State<CadastroFilmeScreen> {
 
   Future<void> _salvarFilme() async {
     if (!_formKey.currentState!.validate()) {
-      return; // Sai se a validação falhar
+      return; // Sai se a validação falha
     }
 
     // Cria o objeto, incluindo o ID se estiver editando
@@ -88,6 +88,7 @@ class _CadastroFilmeScreenState extends State<CadastroFilmeScreen> {
     Navigator.pop(context, true);
   }
 
+  // Limpa todos os TextEditingController para evitar memory leak
   @override
   void dispose() {
     _urlController.dispose();

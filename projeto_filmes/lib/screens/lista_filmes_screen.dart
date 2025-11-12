@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../models/filme.dart';
 import '../database/database_helper.dart';
 import 'cadastro_filme_screen.dart';
-import 'detalhes_filme_screen.dart'; // <--- CORREÇÃO 1: Import de Detalhes
+import 'detalhes_filme_screen.dart';
 
 class ListaFilmesScreen extends StatefulWidget {
   const ListaFilmesScreen({super.key});
@@ -30,7 +30,7 @@ class _ListaFilmesScreenState extends State<ListaFilmesScreen> {
     });
   }
 
-  // Mostra um alerta com o nome do grupo
+  // Função para mostrar um alerta com o nome do grupo
   void _mostrarAlertaGrupo() {
     showDialog(
         context: context,
@@ -82,7 +82,7 @@ class _ListaFilmesScreenState extends State<ListaFilmesScreen> {
     );
   }
 
-  // Widget de item da lista
+  // Widget para manipular os itens da lista
   Widget _buildFilmeItem(Filme filme) {
     return Dismissible(
       key: Key(filme.id.toString()),
@@ -97,14 +97,14 @@ class _ListaFilmesScreenState extends State<ListaFilmesScreen> {
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
         child: ListTile(
-          // <--- CORREÇÃO 2: Navegação para a Tela de Detalhes no clique
           onTap: () {
             Navigator.push(
               context,
+              // Direciona o usuário para a página de detalhes do filme selecionado através do listTile
               MaterialPageRoute(
                 builder: (context) => DetalhesFilmeScreen(filme: filme),
               ),
-              // Recarrega a lista quando voltar
+              // Recarrega a lista quando a ação é finalizada
             ).then((_) => _carregarFilmes());
           },
           contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -123,6 +123,7 @@ class _ListaFilmesScreenState extends State<ListaFilmesScreen> {
               ),
             ),
           ),
+          // Titulo do filme
           title: Text(
             filme.titulo,
             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -192,7 +193,6 @@ class _ListaFilmesScreenState extends State<ListaFilmesScreen> {
 
       // botão flutuante para adicionar filmes novos
       floatingActionButton: FloatingActionButton(
-        // <--- CORREÇÃO 3: Adicionado heroTag para evitar conflito com outras telas
         heroTag: 'addBtn',
         onPressed: () {
           // Navega para a tela de cadastro e espera o resultado

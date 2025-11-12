@@ -1,9 +1,7 @@
-// Seu arquivo lib/screens/detalhes_filme_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/filme.dart';
-// Importa a tela de Cadastro para reutilizá-la
 import 'cadastro_filme_screen.dart';
 
 class DetalhesFilmeScreen extends StatelessWidget {
@@ -11,7 +9,6 @@ class DetalhesFilmeScreen extends StatelessWidget {
   const DetalhesFilmeScreen({super.key, required this.filme});
 
   Widget _buildRatingBar(double nota) {
-    // ... (Mantido o código do RatingBar)
     return RatingBar.builder(
       initialRating: nota,
       minRating: 0,
@@ -38,11 +35,9 @@ class DetalhesFilmeScreen extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        // ... (Conteúdo do corpo da tela mantido)
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // ... (Restante do corpo da tela)
 
             // Seção principal com capa, título e dados
             Padding(
@@ -135,7 +130,7 @@ class DetalhesFilmeScreen extends StatelessWidget {
 
       // Botão Flutuante de Edição
       floatingActionButton: FloatingActionButton(
-        heroTag: 'editBtn', // Necessário para evitar conflito com o FAB da ListaFilmesScreen
+        heroTag: 'editBtn',
         onPressed: () {
           // Navega para a tela de Cadastro/Edição, passando o filme atual
           Navigator.push(
@@ -146,8 +141,7 @@ class DetalhesFilmeScreen extends StatelessWidget {
           ).then((result) {
             // Recarrega a lista de filmes se a edição foi concluída com sucesso
             if (result == true) {
-              // Já que StatelessWidget não pode chamar setState, precisamos voltar para a lista principal
-              // e forçar o recarregamento lá (isso já está configurado na ListaFilmesScreen)
+              // Volta para a lista principal e recarrega os filmes lá
               Navigator.pop(context, true);
             }
           });

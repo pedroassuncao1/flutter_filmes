@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/lista_filmes_screen.dart'; // Importa a nova tela
+import 'screens/lista_filmes_screen.dart';
 
 void main() {
-  // Garante que os widgets do Flutter estejam inicializados antes de acessar o DB
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const FilmeApp());
 }
@@ -18,7 +17,7 @@ class FilmeApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const ListaFilmesScreen(), // Define a tela de listagem como a tela inicial
+      home: const ListaFilmesScreen(),
     );
   }
 }

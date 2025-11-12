@@ -21,7 +21,7 @@ class Filme {
     required this.descricao,
   });
 
-  // 1. Converte um objeto Filme para um Map (USADO PARA SALVAR NO DB)
+  // 1. Converte um objeto Filme para um Map para CREATE
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -36,7 +36,7 @@ class Filme {
     };
   }
 
-  // 2. Cria um objeto Filme a partir de um Map (USADO PARA LER DO DB)
+  // 2. Cria um objeto Filme a partir de um Map para READ
   factory Filme.fromMap(Map<String, dynamic> map) {
     return Filme(
       id: map['id'],
